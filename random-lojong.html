@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojong Slogan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #2980b9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 60px 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 100px rgba(255,255,255,0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .ornament {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .slogan-container {
+            margin: 40px 0;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            position: relative;
+        }
+
+        .slogan-container::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 80px;
+            color: rgba(52, 152, 219, 0.15);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .slogan-number {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.85em;
+            color: #3498db;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .slogan-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 2em;
+            line-height: 1.7;
+            color: #2c3e50;
+            font-weight: 400;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 40px auto 20px;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95em;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #95a5a6;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .slogan-text {
+                font-size: 1.5em;
+            }
+
+            .slogan-container {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ornament">☸</div>
+        <h1>Lojong Slogan</h1>
+        <p class="subtitle">Mind Training</p>
+
+        <div class="slogan-container">
+            <div class="slogan-number" id="sloganNumber"></div>
+            <div class="slogan-text" id="sloganText"></div>
+        </div>
+
+        <button class="refresh-btn" onclick="location.reload()">Refresh for New Slogan</button>
+
+        <div class="footer">
+            From the Atisha tradition of mind training
+        </div>
+    </div>
+
+    <script>
+        // The 59 Lojong Slogans from the Atisha tradition
+        const slogans = [
+            "First, train in the preliminaries",
+            "Regard all dharmas as dreams",
+            "Examine the nature of unborn awareness",
+            "Rest in the nature of alaya, the essence",
+            "In postmeditation, be a child of illusion",
+            "Sending and taking should be practiced alternately",
+            "Three objects, three poisons, three roots of virtue",
+            "In all activities, train with slogans",
+            "Begin the sequence of sending and taking with yourself",
+            "When the world is filled with evil, transform all mishaps into the path of bodhi",
+            "Always maintain only a joyful mind",
+            "If you can practice even when distracted, you are well trained",
+            "Always abide by the three basic principles",
+            "Change your attitude, but remain natural",
+            "Don't talk about injured limbs",
+            "Don't ponder others",
+            "Work with the greatest defilements first",
+            "Give up all hope of fruition",
+            "Abandon poisonous food",
+            "Don't be so predictable",
+            "Don't malign others",
+            "Don't wait in ambush",
+            "Don't bring things to a painful point",
+            "Don't transfer the ox's load to the cow",
+            "Don't try to be the fastest",
+            "Don't act with a twist",
+            "Don't turn gods into demons",
+            "Don't seek others' pain as the limbs of your own happiness",
+            "All dharma agrees at one point",
+            "Of the two witnesses, hold the principal one",
+            "Always maintain only a joyful mind",
+            "The measure of mind training is that it reverses",
+            "Always meditate on whatever provokes resentment",
+            "Don't be swayed by external circumstances",
+            "This time, practice the main points",
+            "Don't misinterpret",
+            "Don't vacillate",
+            "Train wholeheartedly",
+            "Liberate yourself by examining and analyzing",
+            "Don't wallow in self-pity",
+            "Don't be jealous",
+            "Don't be frivolous",
+            "Don't expect applause",
+            "Drive all blames into one",
+            "Be grateful to everyone",
+            "Seeing confusion as the four kayas is unsurpassable protection",
+            "Four practices are the best of methods",
+            "Whatever you meet unexpectedly, join with meditation",
+            "Don't try to be the fastest",
+            "Don't bring things to a painful point",
+            "Don't transfer the ox's load to the cow",
+            "Don't act with a twist",
+            "Don't make gods into demons",
+            "Don't seek others' pain as the limbs of your own happiness",
+            "Do good, avoid evil, appreciate your lunacy, pray for help",
+            "Whatever you meet unexpectedly, join with meditation",
+            "Begin the taking and sending practice with yourself",
+            "Three objects, three poisons, and three seeds of virtue",
+            "In all activities, train with slogans"
+        ];
+
+        function getRandomSlogan() {
+            const randomIndex = Math.floor(Math.random() * slogans.length);
+            return { slogan: slogans[randomIndex], number: randomIndex + 1 };
+        }
+
+        const { slogan, number } = getRandomSlogan();
+        document.getElementById('sloganNumber').textContent = `Slogan ${number} of ${slogans.length}`;
+        document.getElementById('sloganText').textContent = slogan;
+    </script>
+</body>
+</html>
