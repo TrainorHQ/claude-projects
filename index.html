@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojong Mind Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 60px 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 100px rgba(255,255,255,0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .ornament {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 3em;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            text-align: center;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin: 30px auto 50px;
+            max-width: 700px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .card.daily {
+            border-left: 5px solid #e67e22;
+        }
+
+        .card.daily:hover {
+            border-color: #e67e22;
+        }
+
+        .card.random {
+            border-left: 5px solid #3498db;
+        }
+
+        .card.random:hover {
+            border-color: #3498db;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .card.daily h2 {
+            color: #8e44ad;
+        }
+
+        .card.random h2 {
+            color: #2980b9;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #95a5a6;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ornament">☸</div>
+        <h1>Lojong Mind Training</h1>
+        <p class="subtitle">The Seven Points</p>
+
+        <div class="description">
+            The 59 Lojong slogans are traditional Buddhist teachings from the Atisha tradition,
+            designed to train the mind in compassion and awakening. Choose how you'd like to
+            explore these profound teachings.
+        </div>
+
+        <div class="cards-container">
+            <a href="daily-lojong.html" class="card daily">
+                <div class="card-icon">📅</div>
+                <h2>Daily Practice</h2>
+                <p>
+                    Receive the same slogan each day, rotating through all 59 teachings
+                    throughout the year. Perfect for consistent daily contemplation and practice.
+                </p>
+            </a>
+
+            <a href="random-lojong.html" class="card random">
+                <div class="card-icon">🎲</div>
+                <h2>Random Inspiration</h2>
+                <p>
+                    Get a different random slogan each time you visit. Great for spontaneous
+                    insight and discovering teachings exactly when you need them.
+                </p>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p><em>From the Atisha tradition of mind training</em></p>
+            <p>The Seven Points of Training the Mind</p>
+        </div>
+    </div>
+</body>
+</html>
