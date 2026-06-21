@@ -53,12 +53,27 @@ Simply open any of the HTML files in a web browser:
 
 ## Publishing
 
-These pages are pure HTML/CSS/JavaScript with no dependencies, making them easy to publish on:
+These pages are pure HTML/CSS/JavaScript with no dependencies, making them easy to publish on any static web host.
 
-- **GitHub Pages** - Free hosting directly from this repository
-- **Netlify** - Drag and drop deployment
-- **Vercel** - Quick deployment with GitHub integration
-- Any static web hosting service
+### Live Site
+
+The site is hosted at [lojong.tributaryrss.com](https://lojong.tributaryrss.com) on a VPS running Caddy.
+
+### Deploying to the Server
+
+```bash
+rsync -avz --exclude='.git' claude-projects/ tributary:/var/www/lojong/
+```
+
+### Caddy Configuration
+
+```
+lojong.tributaryrss.com {
+    encode gzip
+    root * /var/www/lojong
+    file_server
+}
+```
 
 ## Credits
 
