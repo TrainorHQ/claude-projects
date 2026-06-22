@@ -1,0 +1,62 @@
+name: Deploy to production
+
+# Deploys the site to the VPS (lojong.tributaryrss.com) via rsync over SSH.
+#
+# Runs automatically on every push to the default branch, and can also be
+# triggered manually from the Actions tab ("Run workflow").
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   DEPLOY_SSH_KEY  - private SSH key authorized on the server (full PEM contents)
+#   DEPLOY_HOST     - server hostname or IP (e.g. tributaryrss.com)
+#   DEPLOY_USER     - SSH username on the server
+#   DEPLOY_PATH     - target directory, e.g. /var/www/lojong/  (trailing slash)
+# Optional:
+#   DEPLOY_PORT     - SSH port (defaults to 22 if unset)
+
+on:
+  push:
+    branches:
+      - claude/daily-lojong-slogan-011CULasdzEf7eLzb7DtnWTD
+  workflow_dispatch:
+
+# Never let two deploys run at once.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy with rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          rsync -avz \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='README.md' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22}" \
+            ./ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
+          # To also remove files on the server that no longer exist in the repo,
+          # add --delete above. Left off by default to avoid deleting anything
+          # in the target directory that isn't managed by this repo.
