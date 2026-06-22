@@ -70,6 +70,24 @@ The site is hosted at [lojong.tributaryrss.com](https://lojong.tributaryrss.com)
 
 ### Deploying to the Server
 
+**Automated (recommended):** Pushing to the default branch triggers the
+`.github/workflows/deploy.yml` GitHub Action, which rsyncs the site to the VPS
+over SSH. You can also run it manually from the repo's **Actions** tab via
+**Run workflow**.
+
+This requires the following repository secrets to be configured under
+**Settings → Secrets and variables → Actions**:
+
+| Secret | Description |
+| --- | --- |
+| `DEPLOY_SSH_KEY` | Private SSH key authorized on the server (full key contents) |
+| `DEPLOY_HOST` | Server hostname or IP (e.g. `tributaryrss.com`) |
+| `DEPLOY_USER` | SSH username on the server |
+| `DEPLOY_PATH` | Target directory, e.g. `/var/www/lojong/` (trailing slash) |
+| `DEPLOY_PORT` | *(optional)* SSH port, defaults to `22` |
+
+**Manual fallback:** from a local checkout with SSH access to the server:
+
 ```bash
 rsync -avz --exclude='.git' claude-projects/ tributary:/var/www/lojong/
 ```
